@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const workoutRoutes = require('./src/routes/WorkoutRoutes');
+const WorkoutRoutes = require('./src/routes/WorkoutRoutes');
 
 const app = express();
 app.use(express.json());
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 //workout-routes
-app.use("/api/v1/workouts", workoutRoutes);
+app.use("/api/v1/workouts", WorkoutRoutes);
 
 // Start server
 app.listen(PORT, () =>
