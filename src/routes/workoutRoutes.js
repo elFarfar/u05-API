@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Workout = require('../models/workout'); // Corrected path
+const Workout = require('./src/models/Workout'); 
 
 
 //CRUD_ROUTE
