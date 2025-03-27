@@ -1,32 +1,17 @@
-require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-
-const WorkoutRoutes = require('./src/routes/WorkoutRoutes');
-
 const app = express();
-app.use(express.json());
-app.use(cors());
+const mongoose = require("mongoose");
+const workoutRoutes = require("./src/routes/WorkoutRoutes");
+
+app.use(express.json()); // Middleware to parse JSON requests
+app.use("/api/v1", workoutRoutes); // Versioned routes
+
+// Connect to MongoDB
+mongoose.connect('your_mongodb_connection_string', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log("MongoDB connection error: ", err));
 
 const PORT = process.env.PORT || 3000;
-
-// MongoDB-connection
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log(" Connected to MongoDB Atlas"))
-  .catch(err => console.log("Error connecting to MongoDB:", err));
-
-// Test-Route
-app.get("/", (req, res) => {
-  res.send("Welcome to the Workout API!");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-//workout-routes
-app.use("/api/v1/workouts", WorkoutRoutes);
-
-// Start server
-app.listen(PORT, () =>
-  console.log(`🚀 Server running on http://localhost:${PORT}`)
-);

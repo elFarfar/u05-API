@@ -1,22 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const WorkoutController = require("../controllers/workoutController");
+const workoutController = require("../controllers/workoutController");
+
+
 
 // CRUD Routes
+router.post("/api/v1/workouts", workoutController.createWorkout);
+router.get("/api/v1/workouts", workoutController.getAllWorkouts);
+router.get("/api/v1/workouts/:id", workoutController.getWorkoutById);
+router.put("/api/v1/workouts/:id", workoutController.updateWorkoutById);
+router.delete("/api/v1/workouts/:id", workoutController.deleteWorkoutById);
 
-// Create a new workout (POST)
-router.post("/", WorkoutController.createWorkout);
-
-// Get all workouts (GET)
-router.get("/", WorkoutController.getAllWorkouts);
-
-// Get a single workout by ID (GET)
-router.get("/:id", WorkoutController.getWorkoutById);
-
-// Update a workout by ID (PUT)
-router.put("/:id", WorkoutController.updateWorkoutById);
-
-// Delete a workout by ID (DELETE)
-router.delete("/:id", WorkoutController.deleteWorkoutById);
-
-module.exports = router; // Export the routes
+module.exports = router;
