@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const workoutRoutes = require("/src/routes/workoutRoutes");
+const workoutRoutes = require("./src/routes/workoutRoutes");
 
 app.use(express.json()); // Middleware to parse JSON requests
 app.use("/api/v1", workoutRoutes); // Versioned routes
