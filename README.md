@@ -5,7 +5,7 @@ Ett enkelt REST API för att hantera träningspass (workouts) med CRUD-funktiona
 ## Installation
 
 1. Klona repot:
-   git clone https://github.com/ditt-repo/workout-api.git
+   git clone https://github.com/elFarfar/u05-API.git
 
 2. Installera beroenden: 
 npm install
