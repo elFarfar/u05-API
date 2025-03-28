@@ -8,4 +8,4 @@ const workoutSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now } 
 });
 
-module.exports = mongoose.model('Workout', workoutSchema);
+module.exports = mongoose.model('workout', workoutSchema);
