@@ -1,62 +1,55 @@
-const Workout = require('../models/workout');
+const Workout = require('../models/Workout');
 
-// Controller to handle the logic for creating, updating, fetching workouts
-
+// Skapa en ny workout
 exports.createWorkout = async (req, res) => {
-  try {
-    const newWorkout = new Workout(req.body);
-    const savedWorkout = await newWorkout.save();
-    res.status(201).json(savedWorkout);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+    try {
+        const workout = new Workout(req.body);
+        await workout.save();
+        res.status(201).json(workout);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
 
+// Hämta alla workouts
 exports.getAllWorkouts = async (req, res) => {
-  try {
-    const workouts = await Workout.find();
-    res.json(workouts);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    try {
+        const workouts = await Workout.find();
+        res.json(workouts);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
+// Hämta en workout via ID
 exports.getWorkoutById = async (req, res) => {
-  try {
-    const workout = await Workout.findById(req.params.id);
-    if (!workout) {
-      return res.status(404).json({ message: "Workout not found" });
+    try {
+        const workout = await Workout.findById(req.params.id);
+        if (!workout) return res.status(404).json({ error: 'Workout not found' });
+        res.json(workout);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    res.json(workout);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
 };
 
-exports.updateWorkoutById = async (req, res) => {
-  try {
-    const updatedWorkout = await Workout.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    if (!updatedWorkout) {
-      return res.status(404).json({ message: "Workout not found" });
+// Uppdatera en workout
+exports.updateWorkout = async (req, res) => {
+    try {
+        const workout = await Workout.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!workout) return res.status(404).json({ error: 'Workout not found' });
+        res.json(workout);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    res.json(updatedWorkout);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
 };
 
-exports.deleteWorkoutById = async (req, res) => {
-  try {
-    const deletedWorkout = await Workout.findByIdAndDelete(req.params.id);
-    if (!deletedWorkout) {
-      return res.status(404).json({ message: "Workout not found" });
+// Ta bort en workout
+exports.deleteWorkout = async (req, res) => {
+    try {
+        const workout = await Workout.findByIdAndDelete(req.params.id);
+        if (!workout) return res.status(404).json({ error: 'Workout not found' });
+        res.json({ message: 'Workout deleted' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    res.json({ message: "Workout deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
 };
