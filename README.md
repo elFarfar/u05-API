@@ -2,6 +2,8 @@
 
 Ett enkelt REST API för att hantera träningspass (workouts) med CRUD-funktionalitet.
 
+- Live render: https://u05-api.onrender.com
+
 ## Installation
 
 1. Klona repot:
@@ -29,7 +31,7 @@ npm start
 ### Exempelanrop med cURL
 
 #### Skapa en workout
-```sh
+
 curl -X POST http://localhost:5000/api/workouts \
   -H "Content-Type: application/json" \
   -d '{
