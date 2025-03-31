@@ -44,7 +44,7 @@ exports.updateWorkoutById = async (req, res) => {
 };
 
 // Ta bort en workout
-exports.deleteWorkout = async (req, res) => {
+exports.deleteWorkoutById = async (req, res) => {
     try {
         const workout = await Workout.findByIdAndDelete(req.params.id);
         if (!workout) return res.status(404).json({ error: 'Workout not found' });
