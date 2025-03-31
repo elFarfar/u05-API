@@ -1,6 +1,6 @@
 const Workout = require('../models/Workout');
 
-// Skapa en ny workout
+// Create a new workout
 exports.createWorkout = async (req, res) => {
     try {
         const workout = new Workout(req.body);
@@ -11,7 +11,7 @@ exports.createWorkout = async (req, res) => {
     }
 };
 
-// Hämta alla workouts
+// Get all Workouts
 exports.getAllWorkouts = async (req, res) => {
     try {
         const workouts = await Workout.find();
@@ -21,7 +21,7 @@ exports.getAllWorkouts = async (req, res) => {
     }
 };
 
-// Hämta en workout via ID
+// Get one workout by ID
 exports.getWorkoutById = async (req, res) => {
     try {
         const workout = await Workout.findById(req.params.id);
@@ -32,7 +32,7 @@ exports.getWorkoutById = async (req, res) => {
     }
 };
 
-// Uppdatera en workout
+// Update  workout
 exports.updateWorkoutById = async (req, res) => {
     try {
         const workout = await Workout.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -43,7 +43,7 @@ exports.updateWorkoutById = async (req, res) => {
     }
 };
 
-// Ta bort en workout
+// DELETE workout
 exports.deleteWorkoutById = async (req, res) => {
     try {
         const workout = await Workout.findByIdAndDelete(req.params.id);
