@@ -1,9 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const WorkoutRoutes = require('./src/routes/WorkoutRoutes');
-
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const WorkoutRoutes = require("./src/routes/WorkoutRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -12,13 +11,19 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cors());
 
+// Root route - Render
+app.get("/", (req, res) => {
+  res.send("Welcome to the Workout API");
+});
+
 // Routes
-app.use('/api/v1/workouts', WorkoutRoutes);
+app.use("/api/v1/workouts", WorkoutRoutes);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    
-}).then(() => {
-    console.log('MongoDB connected');
+mongoose
+  .connect(process.env.MONGO_URI, {})
+  .then(() => {
+    console.log("MongoDB connected");
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}).catch(err => console.log(err));
+  })
+  .catch((err) => console.log(err));
